@@ -7,7 +7,8 @@ var logger = require('morgan');
 require('./helpers/db')();
 
 let loginRouter = require('./routes/login');
-let signupRouter=require('./routes/signup')
+let signupRouter=require('./routes/signup');
+let createRouter=require('./routes/createcontact')
 
 var app = express();
 
@@ -29,7 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // });
 
 app.use('/', loginRouter);
-app.use('/signup', signupRouter)
+app.use('/signup', signupRouter);
+app.use('/createcontact', createRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
