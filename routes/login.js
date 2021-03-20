@@ -8,9 +8,19 @@ router.post('/',(req,res,next)=>{
     let password=req.body.password;
 
     UserModel.findOne({email})
-    .then((result)=>{
-        bcrypt.compare(password, result.password)
-        .then((data)=>{res.json(data)})
+    .then((firstRes)=>{
+        if(!firstRes){
+            res.json({email:false})
+          } else{
+            Promise.all([
+                firstRes, (bcrypt.compare(password, firstRes.password))
+                ])
+                .then(([firstResponse, secondResponse])=>{
+                    console.log(firstResponse);
+                    console.log(secondResponse)
+                    res.json([firstResponse,secondResponse])
+                })  
+          }
     })
     .catch((err)=>{res.json(err)})
 })
