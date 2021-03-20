@@ -2,6 +2,7 @@ let mongoose=require('mongoose');
 let Schema=mongoose.Schema;
 
 let ContactSchema=new Schema({
+    user_id:Schema.Types.ObjectId,
     nameLastName:{type:String, required:true},
     email:{type:String},
     phone:{type:String, required:true},
