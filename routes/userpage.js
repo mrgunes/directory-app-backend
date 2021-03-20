@@ -6,7 +6,7 @@ let UserModel=require('../models/User')
 
 router.get('/:userId', (req,res,next)=>{
     UserModel.aggregate([
-        {$match:{id:mongoose.Types.ObjectId(req.params.userId)}},
+        {$match:{_id:mongoose.Types.ObjectId(req.params.userId)}},
         {$lookup:{
             from:'contacts',
             localField:'_id',
@@ -17,3 +17,5 @@ router.get('/:userId', (req,res,next)=>{
     .then((data)=>{res.json(data)})
     .catch((err)=>{res.json(err)})
 })
+
+module.exports=router;
