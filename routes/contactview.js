@@ -14,4 +14,10 @@ router.put('/:id',(req,res,next)=>{
     .catch((err)=>{res.json(err)})
 })
 
+router.delete('/:id',(req,res,next)=>{
+    ContactModel.findByIdAndRemove(req.params.id) 
+    .then((data)=>{res.json(data)})
+    .catch((err)=>{res.json(err)})
+});
+
 module.exports=router;
